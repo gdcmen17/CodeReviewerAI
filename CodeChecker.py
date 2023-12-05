@@ -39,7 +39,7 @@ class CodeChecker:
 
         return False
 
-    def analyze_code(self, analyze_with_ai=False):
+    def analyze_code(self, analyze_with_ai=True):
         try:
             self.log.info("Analyzing code...")
 
@@ -52,13 +52,17 @@ class CodeChecker:
 
             self.log.info("No syntax errors found in the code.")
 
-            if analyze_with_ai:
-                self.analyze_with_ai()
+
 
         except SyntaxError as se:
             self.log.error(str(se))
             self.log.error(self.error_output)
             self.log.error(f"The error was in line {self.get_error_line()} and in the position {self.get_error_position()}")
+            
+            # Whenever it receives a Syntax Error, also call the AI
+            if analyze_with_ai:
+                self.analyze_with_ai()
+
 
         except Exception as e:
             self.log.error(f"Error in analyze_code: {e}")
@@ -69,7 +73,7 @@ class CodeChecker:
     def analyze_with_ai(self):
         try:
             if self.error_output:
-                error_line, error_position = self.get_error_line_position()
+                error_line, error_position = self.get_error_position()
                 self.log.info(f"AI analysis is skipped due to syntax errors in line {error_line} at position {error_position}.")
                 return
 
@@ -89,8 +93,8 @@ class CodeChecker:
                 prediction = "Review and fix the code based on the reported syntax error."
                 self.log.info(f"Suggestion: {suggestion}")
 
-            error_line, error_position = self.get_error_line_position()
-            self.log.info(f"Suggestion: Apply the suggested fix to your code in line {error_line} at position {error_position}.")
+            error_line, error_position = self.get_error_position()
+            self.log.info(f"AI analysis is skipped due to syntax errors in line {error_line} at position {error_position}.")
             self.log.info("Fixed Code:")
             fixed_code = self.get_fixed_code(prediction)
             self.log.info(fixed_code)
@@ -127,4 +131,3 @@ class CodeChecker:
                 self.log.warning("error.txt not found during cleanup")
         except Exception as e:
             self.log.warning(f"Error during cleanup: {e}")
-

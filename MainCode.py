@@ -12,10 +12,10 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
 logging.basicConfig(level=logging.INFO)
-code_to_check = str(input("Enter the code to analyze: "))
+#code_to_check = str(input("Enter the code to analyze: "))
 
-checker = CodeChecker(code = code_to_check)
-checker.analyze_code()  
+#checker = CodeChecker(code = code_to_check)
+#checker.analyze_code()  
 
 print("Now we are analyzing the file")
 filename = "CodeToRead.txt"

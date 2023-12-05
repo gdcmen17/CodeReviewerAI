@@ -1,7 +1,16 @@
 #include <iostream>
 
+
+
 int main(){
     cout << "Hello World!";
+
+    a = 90;
+
+    for(int i = 0; i < a; i++){
+        cout << i;
+    }
+
 
     return 0;
 }
