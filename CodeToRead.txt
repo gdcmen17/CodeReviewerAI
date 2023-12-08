@@ -1,6 +1,6 @@
+// Sample code to read and work with
+
 #include <iostream>
-
-
 
 int main(){
     cout << "Hello World!";
@@ -12,5 +12,5 @@ int main(){
     }
 
 
-    return 0;
+    return 0
 }
